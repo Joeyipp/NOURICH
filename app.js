@@ -4,8 +4,9 @@ const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const port = process.env.PORT || 3000;
+
 var app = express();
-var server = require('http').createServer(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,3 +63,7 @@ app.post('/webhook', function (req, res) {
     // console.log(responseObj);
     return res.json(responseObj);
 })
+
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`);
+});
