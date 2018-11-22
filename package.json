@@ -1,0 +1,26 @@
+{
+  "name": "nourich",
+  "version": "1.0.0",
+  "description": "A Health Conversational Agent",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joeyipp/NOURICH.git"
+  },
+  "keywords": [
+    "chatbot",
+    "ai",
+    "health",
+    "food",
+    "nutrition"
+  ],
+  "author": "Joeyipp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joeyipp/NOURICH/issues"
+  },
+  "homepage": "https://github.com/Joeyipp/NOURICH#readme"
+}
