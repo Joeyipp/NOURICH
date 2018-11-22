@@ -31,7 +31,11 @@ app.post('/webhook', function (req, res) {
     if (!req.body) return res.sendStatus(400);
     res.setHeader("Content-Type", "application/json");
     console.log("Here is the post request from DialogFlow");
-    console.log(req.body);
+
+    // console.log(req.body);
+    console.log("Text: ", req.body.queryResult.queryText)
+    console.log("Intent: ", req.body.queryResult.intent.displayName)
+    console.log("Default Fulfillment Messages", req.body.queryResult.fulfillmentMessages)
     
     let response = " ";
     let responseObj = {
