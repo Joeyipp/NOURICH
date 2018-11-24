@@ -1,13 +1,18 @@
+// NPM Packages
 const hbs = require('hbs');
 const path = require('path');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// Own Packages
+const nutrition = require('./nutrition/nutrition')
+
 const port = process.env.PORT || 3000;
 
 var app = express();
 
+// Import and Setup Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
@@ -26,46 +31,68 @@ app.get('/', (req, res) => {
       });
 });
 
+
+// Webhook
 app.post('/webhook', function (req, res) {
-    console.log("Received a post request");
     if (!req.body) return res.sendStatus(400);
     res.setHeader("Content-Type", "application/json");
     console.log("Here is the post request from DialogFlow");
 
     // console.log(req.body);
-    console.log("Text: ", req.body.queryResult.queryText)
-    console.log("Intent: ", req.body.queryResult.intent.displayName)
-    console.log("Default Fulfillment Messages", req.body.queryResult.fulfillmentMessages)
-    
-    let response = " ";
-    let responseObj = {
-        "fulfillmentText": response,
-        "fulfillmentMessages": [{
-            "text": {
-                "text": [
-                    "This is a test from webhook!"]
-                }
-            }],
-        "source": "",
-        "payload": {
-            "google": {
-              "expectUserResponse": true,
-              "richResponse": {
-                "items": [
-                  {
-                    "simpleResponse": {
-                      "textToSpeech": "This is a simple response"
-                    }
-                  }
-                ]
-              }
-            }
-        }
-    }
+    var intent = req.body.queryResult.intent.displayName
 
-    // console.log("Here is the response to DialogFlow");
-    // console.log(responseObj);
-    return res.json(responseObj);
+    if (intent == "Nutrition Information") {
+        var userQuery = req.body.queryResult.queryText
+        var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages
+        
+        nutrition.getNutrition(userQuery).then((res) => {
+            food = res.food;
+            food_sum = res.food_sum;
+            nutrition_description = `Amount Per Serving\nCalories: ${food_sum.sum_calories.toFixed()}\nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g\nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg\nSodium: ${food_sum.sum_sodium.toFixed()}mg\nPotassium: ${food_sum.sum_potassium.toFixed()}mg\nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g\n  Dietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g\n  Sugars: ${food_sum.sum_sugar.toFixed(1)}g\nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
+            
+            let responseObj = {
+                "fulfillmentText": "",
+                "fulfillmentMessages": [{
+                    "text": {
+                        "text": [
+                            defaultFulfillmentMessage]
+                        }
+                    }],
+                "source": "",
+                "payload": {
+                    "google": {
+                    "expectUserResponse": true,
+                    "richResponse": {
+                        "items": [
+                        {
+                            "simpleResponse": {
+                            "textToSpeech": defaultFulfillmentMessage
+                            }
+                        },
+                        {
+                            "basicCard": {
+                              "title": "Nutrition Facts",
+                              "subtitle": food_sum.sum_food_name,
+                              "formattedText": nutrition_description,
+                              "image": {
+                                "url": food[0].photo,
+                                "accessibilityText": ""
+                              }
+                            }
+                          }
+                        ]
+                    }
+                    }
+                }
+            }
+
+            // console.log("Here is the response to DialogFlow");
+            // console.log(responseObj);
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
 })
 
 app.listen(port, () => {
