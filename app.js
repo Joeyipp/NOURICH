@@ -46,9 +46,9 @@ app.post('/webhook', function (req, res) {
         console.log(userQuery);
         var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages;
         
-        nutrition.getNutrition(userQuery).then((res) => {
-            food = res.food;
-            food_sum = res.food_sum;
+        nutrition.getNutrition(userQuery).then((response) => {
+            food = response.food;
+            food_sum = response.food_sum;
             nutrition_description = `Amount Per Serving\nCalories: ${food_sum.sum_calories.toFixed()}\nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g\nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg\nSodium: ${food_sum.sum_sodium.toFixed()}mg\nPotassium: ${food_sum.sum_potassium.toFixed()}mg\nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g\n  Dietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g\n  Sugars: ${food_sum.sum_sugar.toFixed(1)}g\nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
             
             let responseObj = {
@@ -91,7 +91,7 @@ app.post('/webhook', function (req, res) {
             // console.log(responseObj);
             return res.json(responseObj);
         }).catch((err) => {
-            console.log(err)
+            console.log(err);
         })
     }
 })
