@@ -62,7 +62,7 @@ app.post('/webhook', function (req, res) {
                             "items": [
                             {
                                 "simpleResponse": {
-                                    "textToSpeech": defaultFulfillmentMessage
+                                    "textToSpeech": "test"
                                 }
                             },
                             {
