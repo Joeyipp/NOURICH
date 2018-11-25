@@ -29,6 +29,8 @@
     "hbs": "^4.0.1",
     "request": "^2.88.0",
     "mongoose": "5.3.13",
-    "actions-on-google": "2.5.0"
+    "actions-on-google": "2.5.0",
+    "firebase-tools": "6.1.1",
+    "firebase-functions" : "2.1.0"
   }
 }
