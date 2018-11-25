@@ -74,7 +74,7 @@ app.post('/webhook', function (req, res) {
         return res.json(responseObj)
     }
 
-    elif (intent == "Nutrition Information") {
+    else if (intent == "Nutrition Information") {
         console.log("Here is the post request from DialogFlow");
         console.log(userQuery);
 
