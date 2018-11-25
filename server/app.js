@@ -1,12 +1,17 @@
 // NPM Packages
 const hbs = require('hbs');
 const path = require('path');
+const moment = require('moment');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// Own Packages
-const nutrition = require('./nutrition/nutrition')
+// Local Packages
+const {mongoose} = require('./db/mongoose');
+const {User} = require('./models/user');
+const welcome = require('./packages/welcome')
+const nutrition = require('./packages/nutrition')
+
 
 const port = process.env.PORT || 3000;
 
@@ -41,35 +46,11 @@ app.post('/webhook', function (req, res) {
     var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text[0];
 
     if (intent == "Default Welcome Intent") {
-        var responseObj = {
-            "payload": {
-                "google": {
-                    "expectUserResponse": true,
-                    "richResponse": {
-                        "items": [
-                        {
-                            "simpleResponse": {
-                                "textToSpeech": defaultFulfillmentMessage
-                            }
-                        }
-                        ],
-                        "suggestions": [
-                            {
-                              "title": "Login"
-                            },
-                            {
-                              "title": "Signup"
-                            },
-                            {
-                                "title": "Continue as Guest"
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-        
-        return res.json(responseObj)
+        welcome.welcomePayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     else if (intent == "Nutrition Information") {
@@ -81,6 +62,34 @@ app.post('/webhook', function (req, res) {
         }).catch((err) => {
             console.log(err);
         })
+    }
+
+    else if (intent == "User Login & Signup") {
+        var name = req.body.queryResult.parameters["given-name"];
+        var userIntent = req.body.queryResult.parameters["Account"];
+
+        if (userIntent == "Login") {
+            User.findOne({name}).then((doc) => {
+                console.log(doc);
+            })
+
+            return res.json({
+                "payload": {
+                    "google": {
+                        "expectUserResponse": true,
+                        "richResponse": {
+                            "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Hello"
+                                }
+                            }
+                            ]
+                        }
+                    }
+                }
+            })
+        }
     }
 })
 
