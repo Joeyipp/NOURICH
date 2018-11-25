@@ -67,10 +67,10 @@ app.post('/webhook', function (req, res) {
                             {
                                 "basicCard": {
                                     "title": "Nutrition Facts",
-                                    "subtitle": food_sum.sum_food_name,
-                                    "formattedText": nutrition_description,
+                                    "subtitle": "test",
+                                    "formattedText": "test",
                                     "image": {
-                                        "imageUri": food[0].photo,
+                                        "imageUri": "test",
                                         "accessibilityText": "sample text"
                                     }
                                 }
