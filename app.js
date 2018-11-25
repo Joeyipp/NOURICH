@@ -43,7 +43,8 @@ app.post('/webhook', function (req, res) {
 
     if (intent == "Nutrition Information") {
         var userQuery = req.body.queryResult.queryText
-        var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages
+        console.log(userQuery);
+        var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages;
         
         nutrition.getNutrition(userQuery).then((res) => {
             food = res.food;

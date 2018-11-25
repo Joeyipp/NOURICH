@@ -80,13 +80,13 @@ var getNutrition = (query) => {
     });
 }
 
-// Sample request
-getNutrition("1 mashed potatoes 2 tbsp gravy").then((res) => {
-    console.log(res.food);
-    console.log(res.food_sum)
-}).catch((err) => {
-    console.log(err);
-})
+// // Sample request
+// getNutrition("1 mashed potatoes 2 tbsp gravy").then((res) => {
+//     console.log(res.food);
+//     console.log(res.food_sum)
+// }).catch((err) => {
+//     console.log(err);
+// })
 
 module.exports.getNutrition = getNutrition;
 
