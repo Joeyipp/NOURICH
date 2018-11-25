@@ -98,7 +98,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                         }
                     },
                     {
-                        "card": {
+                        "Card": {
                             "title": "Nutrition Facts",
                             "subtitle": food_sum.sum_food_name,
                             "imageUri": food[0].photo
