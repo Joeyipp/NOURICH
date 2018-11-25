@@ -40,7 +40,6 @@ app.post('/webhook', function (req, res) {
 
     // console.log(req.body);
     var intent = req.body.queryResult.intent.displayName;
-    var responseObj = {};
 
     if (intent == "Nutrition Information") {
         var userQuery = req.body.queryResult.queryText
@@ -82,8 +81,8 @@ app.post('/webhook', function (req, res) {
             }          
         }
 
-        getResponseObj(userQuery).then((response) => {
-            responseObj = response;
+        getResponseObj(userQuery).then((responseObj) => {
+            console.log(JSON.stringify(responseObj, undefined, 2))
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
