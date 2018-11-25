@@ -98,14 +98,10 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                         }
                     },
                     {
-                        "basicCard": {
+                        "card": {
                             "title": "Nutrition Facts",
                             "subtitle": food_sum.sum_food_name,
-                            "formattedText": nutrition_description,
-                            "image": {
-                                "imageUri": https://developers.google.com/actions/images/table-card.png,
-                                "accessibilityText": food_sum.sum_food_name
-                            }
+                            "imageUri": food[0].photo
                         }
                     }
                     ]
