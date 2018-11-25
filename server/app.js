@@ -51,20 +51,18 @@ app.post('/webhook', function (req, res) {
                             "simpleResponse": {
                                 "textToSpeech": defaultFulfillmentMessage
                             }
-                        },
-                        {
-                            "suggestions": [
-                                {
-                                  "title": "Login"
-                                },
-                                {
-                                  "title": "Signup"
-                                },
-                                {
-                                    "title": "Continue as Guest"
-                                }
-                              ]
                         }
+                        ],
+                        "suggestions": [
+                            {
+                              "title": "Login"
+                            },
+                            {
+                              "title": "Signup"
+                            },
+                            {
+                                "title": "Continue as Guest"
+                            }
                         ]
                     }
                 }
