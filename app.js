@@ -93,6 +93,7 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
     }
+    console.log(responseObj)
     return res.json(responseObj);
 })
 
