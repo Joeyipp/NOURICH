@@ -39,7 +39,8 @@ app.post('/webhook', function (req, res) {
     console.log("Here is the post request from DialogFlow");
 
     // console.log(req.body);
-    var intent = req.body.queryResult.intent.displayName
+    var intent = req.body.queryResult.intent.displayName;
+    var responseObj = {};
 
     if (intent == "Nutrition Information") {
         var userQuery = req.body.queryResult.queryText
@@ -92,12 +93,13 @@ app.post('/webhook', function (req, res) {
         }
 
         getResponseObj(userQuery).then((response) => {
-            console.log(response);
-            return res.json(responseObj);
+            responseObj = response
         }).catch((err) => {
             console.log(err);
         })
     }
+    console.log(responseObj)
+    return res.json(responseObj);
 })
 
 app.listen(port, () => {
