@@ -4,7 +4,10 @@ const path = require('path');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
-const {dialogflow, Image} = require('actions-on-google')
+
+// Import Google Packages
+const functions = require('firebase-functions');
+const {dialogflow, Image} = require('actions-on-google');
 
 // Own Packages
 const nutrition = require('./nutrition/nutrition')
@@ -33,6 +36,7 @@ app.get('/', (req, res) => {
       });
 });
 
+// Actions-On-Google
 dflow.intent('Default Welcome Intent', conv => {
     conv.ask('Hi, how is it going?')
     conv.ask(`Here's a picture of a cat`)
@@ -66,3 +70,5 @@ app.post('/webhook', function (req, res) {
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`);
 });
+
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest(dflow)
