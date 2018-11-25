@@ -56,7 +56,7 @@ app.post('/webhook', function (req, res) {
                             "suggestions": [
                                 {
                                     "title": ["Login", "Signup"]
-                                },
+                                }
                             ]
                         }
                         ]
