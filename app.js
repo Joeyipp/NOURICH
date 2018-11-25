@@ -51,6 +51,10 @@ app.post('/webhook', function (req, res) {
             food_sum = response.food_sum;
             nutrition_description = `Amount Per Serving\nCalories: ${food_sum.sum_calories.toFixed()}\nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g\nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg\nSodium: ${food_sum.sum_sodium.toFixed()}mg\nPotassium: ${food_sum.sum_potassium.toFixed()}mg\nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g\n  Dietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g\n  Sugars: ${food_sum.sum_sugar.toFixed(1)}g\nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
             
+            console.log(food_sum.sum_food_name);
+            console.log(nutrition_description);
+            console.log(food[0].photo)
+
             let responseObj = {
                 // "fulfillmentText": "",
                 // "fulfillmentMessages": [{
