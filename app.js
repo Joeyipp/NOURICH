@@ -67,16 +67,16 @@ app.post('/webhook', function (req, res) {
                             "items": [
                             {
                                 "simpleResponse": {
-                                    "textToSpeech": defaultFulfillmentMessage
+                                    "textToSpeech": "Test"
                                 }
                             },
                             {
                                 "basicCard": {
                                     "title": "Nutrition Facts",
-                                    "subtitle": food_sum.sum_food_name,
+                                    "subtitle": "Test",
                                     "formattedText": "Testing",
                                     "image": {
-                                        "imageUri": food[0].photo,
+                                        "imageUri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQl3GcgMNmEXIWOMa_Wf7iG-lVd4DAWkZmy7tAumnT3DUOWK1M",
                                         "accessibilityText": "sample text"
                                     }
                                 }
