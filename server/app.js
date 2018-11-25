@@ -33,6 +33,14 @@ app.get('/', (req, res) => {
       });
 });
 
+dflow.intent('Default Welcome Intent', conv => {
+    conv.ask('Hi, how is it going?')
+    conv.ask(`Here's a picture of a cat`)
+    conv.ask(new Image({
+      url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
+      alt: 'A cat',
+    }))
+})
 
 // Webhook
 app.post('/webhook', function (req, res) {
@@ -42,15 +50,6 @@ app.post('/webhook', function (req, res) {
     var intent = req.body.queryResult.intent.displayName;
     var userQuery = req.body.queryResult.queryText;
     var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-
-    dflow.intent('Default Welcome Intent', conv => {
-        conv.ask('Hi, how is it going?')
-        conv.ask(`Here's a picture of a cat`)
-        conv.ask(new Image({
-          url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
-          alt: 'A cat',
-        }))
-    })
 
     if (intent == "Nutrition Information") {
         console.log("Here is the post request from DialogFlow");
