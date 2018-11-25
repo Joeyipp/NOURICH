@@ -52,37 +52,37 @@ app.post('/webhook', function (req, res) {
             nutrition_description = `Amount Per Serving\nCalories: ${food_sum.sum_calories.toFixed()}\nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g\nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg\nSodium: ${food_sum.sum_sodium.toFixed()}mg\nPotassium: ${food_sum.sum_potassium.toFixed()}mg\nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g\n  Dietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g\n  Sugars: ${food_sum.sum_sugar.toFixed(1)}g\nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
             
             let responseObj = {
-                "fulfillmentText": "",
-                "fulfillmentMessages": [{
-                    "text": {
-                        "text": [
-                            defaultFulfillmentMessage]
-                        }
-                    }],
-                "source": "",
+                // "fulfillmentText": "",
+                // "fulfillmentMessages": [{
+                //     "text": {
+                //         "text": [
+                //             defaultFulfillmentMessage]
+                //         }
+                //     }],
+                // "source": "",
                 "payload": {
                     "google": {
-                    "expectUserResponse": true,
-                    "richResponse": {
-                        "items": [
-                        {
-                            "simpleResponse": {
-                            "textToSpeech": defaultFulfillmentMessage
+                        "expectUserResponse": true,
+                        "richResponse": {
+                            "items": [
+                            {
+                                "simpleResponse": {
+                                "textToSpeech": defaultFulfillmentMessage
+                                }
+                            },
+                            {
+                                "basicCard": {
+                                "title": "Nutrition Facts",
+                                "subtitle": food_sum.sum_food_name,
+                                "formattedText": nutrition_description,
+                                "image": {
+                                    "url": food[0].photo,
+                                    "accessibilityText": ""
+                                }
+                                }
                             }
-                        },
-                        {
-                            "basicCard": {
-                              "title": "Nutrition Facts",
-                              "subtitle": food_sum.sum_food_name,
-                              "formattedText": nutrition_description,
-                              "image": {
-                                "url": food[0].photo,
-                                "accessibilityText": ""
-                              }
-                            }
-                          }
-                        ]
-                    }
+                            ]
+                        }
                     }
                 }
             }
