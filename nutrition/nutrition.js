@@ -84,7 +84,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
     const foodInfo = await getNutrition(userQuery);
     const food = foodInfo.food;
     const food_sum = foodInfo.food_sum;
-    nutrition_description = `**Amount Per Serving**  \nCalories: ${food_sum.sum_calories.toFixed()}\n  \nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g\n  \nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg  \nSodium: ${food_sum.sum_sodium.toFixed()}mg  \nPotassium: ${food_sum.sum_potassium.toFixed()}mg  \nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g  \n  Dietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g  \n  Sugars: ${food_sum.sum_sugar.toFixed(1)}g  \nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
+    nutrition_description = `Calories: ${food_sum.sum_calories.toFixed()}  \nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g  \nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg  \nSodium: ${food_sum.sum_sodium.toFixed()}mg  \nPotassium: ${food_sum.sum_potassium.toFixed()}mg  \nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g  \nDietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g  \nSugars: ${food_sum.sum_sugar.toFixed(1)}g  \nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
     
     return nutritionPayload = {
         "payload": {
@@ -101,7 +101,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                         "basicCard": {
                             "title": "Nutrition Facts",
                             "subtitle": food_sum.sum_food_name.trim(),
-                            "formattedText": nutrition_description,
+                            "formattedText": `**Amount Per Serving** + ${nutrition_description}`,
                             "image": {
                                 "url": food[0].photo,
                                 "accessibilityText": food_sum.sum_food_name
