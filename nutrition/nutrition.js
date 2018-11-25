@@ -80,13 +80,40 @@ var getNutrition = (query) => {
     });
 }
 
-// // Sample request
-// getNutrition("1 mashed potatoes 2 tbsp gravy").then((res) => {
-//     console.log(res.food);
-//     console.log(res.food_sum)
-// }).catch((err) => {
-//     console.log(err);
-// })
+var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
+    const foodInfo = await getNutrition(userQuery);
+    const food = foodInfo.food;
+    const food_sum = foodInfo.food_sum;
+    nutrition_description = `Amount Per Serving\nCalories: ${food_sum.sum_calories.toFixed()}\nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g\nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg\nSodium: ${food_sum.sum_sodium.toFixed()}mg\nPotassium: ${food_sum.sum_potassium.toFixed()}mg\nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g\n  Dietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g\n  Sugars: ${food_sum.sum_sugar.toFixed(1)}g\nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
+    
+    return nutritionPayload = {
+        "payload": {
+            "google": {
+                "expectUserResponse": true,
+                "richResponse": {
+                    "items": [
+                    {
+                        "simpleResponse": {
+                            "textToSpeech": defaultFulfillmentMessage
+                        }
+                    },
+                    {
+                        "basicCard": {
+                            "title": "Nutrition Facts",
+                            "subtitle": food_sum.sum_food_name,
+                            "formattedText": nutrition_description,
+                            "image": {
+                                "imageUri": food[0].photo,
+                                "accessibilityText": ""
+                            }
+                        }
+                    }
+                    ]
+                }
+            }
+        }
+    }          
+}
 
-module.exports.getNutrition = getNutrition;
+module.exports.getNutritionPayload = getNutritionPayload;
 
