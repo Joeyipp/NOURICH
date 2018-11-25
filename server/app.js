@@ -4,6 +4,7 @@ const path = require('path');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
+// const {dialogflow, Image} = require('actions-on-google')
 
 // Own Packages
 const nutrition = require('./nutrition/nutrition')
@@ -11,6 +12,7 @@ const nutrition = require('./nutrition/nutrition')
 const port = process.env.PORT || 3000;
 
 var app = express();
+// var dflow = dialogflow();
 
 // Import and Setup Middlewares
 app.use(bodyParser.json());
