@@ -101,7 +101,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                         "basicCard": {
                             "title": "Nutrition Facts",
                             "subtitle": food_sum.sum_food_name.trim(),
-                            "formattedText": nutrition_description.trim(),
+                            "formattedText": "test",
                             "image": {
                                 "url": food[0].photo,
                                 "accessibilityText": food_sum.sum_food_name
