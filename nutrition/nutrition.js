@@ -103,7 +103,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                             "subtitle": food_sum.sum_food_name,
                             "formattedText": nutrition_description,
                             "image": {
-                                "imageUri": "https://developers.google.com/actions/images/table-card.png",
+                                "imageUri": https://developers.google.com/actions/images/table-card.png,
                                 "accessibilityText": food_sum.sum_food_name
                             }
                         }
