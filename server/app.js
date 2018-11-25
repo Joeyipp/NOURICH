@@ -4,7 +4,7 @@ const path = require('path');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
-// const {dialogflow, Image} = require('actions-on-google')
+const {dialogflow, Image} = require('actions-on-google')
 
 // Own Packages
 const nutrition = require('./nutrition/nutrition')
@@ -12,7 +12,7 @@ const nutrition = require('./nutrition/nutrition')
 const port = process.env.PORT || 3000;
 
 var app = express();
-// var dflow = dialogflow();
+var dflow = dialogflow();
 
 // Import and Setup Middlewares
 app.use(bodyParser.json());
@@ -39,11 +39,18 @@ app.post('/webhook', function (req, res) {
     if (!req.body) return res.sendStatus(400);
     res.setHeader("Content-Type", "application/json");
 
-    console.log(req.body);
-    
     var intent = req.body.queryResult.intent.displayName;
     var userQuery = req.body.queryResult.queryText;
     var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text[0];
+
+    dflow.intent('Default Welcome Intent', conv => {
+        conv.ask('Hi, how is it going?')
+        conv.ask(`Here's a picture of a cat`)
+        conv.ask(new Image({
+          url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
+          alt: 'A cat',
+        }))
+    })
 
     if (intent == "Nutrition Information") {
         console.log("Here is the post request from DialogFlow");
