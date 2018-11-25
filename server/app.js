@@ -39,6 +39,8 @@ app.post('/webhook', function (req, res) {
     if (!req.body) return res.sendStatus(400);
     res.setHeader("Content-Type", "application/json");
 
+    console.log(req.body);
+    
     var intent = req.body.queryResult.intent.displayName;
     var userQuery = req.body.queryResult.queryText;
     var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text[0];
