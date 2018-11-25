@@ -45,6 +45,8 @@ app.post('/webhook', function (req, res) {
         var userQuery = req.body.queryResult.queryText
         console.log(userQuery);
         var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages;
+        
+        console.log(defaultFulfillmentMessage)
 
         var getResponseObj = async (userQuery) => {
             const foodInfo = await nutrition.getNutrition(userQuery);
