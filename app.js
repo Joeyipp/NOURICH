@@ -44,7 +44,7 @@ app.post('/webhook', function (req, res) {
     if (intent == "Nutrition Information") {
         var userQuery = req.body.queryResult.queryText
         console.log(userQuery);
-        var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages;
+        var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text;
         
         console.log(defaultFulfillmentMessage)
 
