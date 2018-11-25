@@ -104,7 +104,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                             "formattedText": nutrition_description,
                             "image": {
                                 "imageUri": food[0].photo,
-                                "accessibilityText": ""
+                                "accessibilityText": food_sum.sum_food_name
                             }
                         }
                     }
@@ -114,6 +114,12 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
         }
     }          
 }
+
+// getNutritionPayload("1 slice of pizza", "bla").then((res) => {
+//     console.log(JSON.stringify(res, undefined, 2));
+// }).catch((err) => {
+//     console.log(err)
+// })
 
 module.exports.getNutritionPayload = getNutritionPayload;
 
