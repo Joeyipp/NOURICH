@@ -103,7 +103,7 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
                             "subtitle": food_sum.sum_food_name,
                             "formattedText": nutrition_description,
                             "image": {
-                                "imageUri": food[0].photo.toString(),
+                                "url": food[0].photo.toString(),
                                 "accessibilityText": food_sum.sum_food_name
                             }
                         }
