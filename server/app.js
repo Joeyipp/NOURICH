@@ -9,10 +9,12 @@ const bodyParser = require('body-parser');
 // Local Packages
 const {mongoose} = require('./db/mongoose');
 const {User} = require('./models/user');
-const welcome = require('./packages/welcome')
-const nutrition = require('./packages/nutrition')
-const account = require('./packages/account')
-const utils = require('./packages/utils')
+const welcome = require('./packages/welcome');
+const nutrition = require('./packages/nutrition');
+const account = require('./packages/account');
+const utils = require('./packages/utils');
+const foodFact = require('./packages/foodFact');
+const menu = require('./packages/menu')
 
 const port = process.env.PORT || 3000;
 
@@ -146,21 +148,13 @@ app.post('/webhook', function (req, res) {
         })
     }
 
-    // else if (intent == "User Signup Health Condition") {
-    //     var name = req.body.queryResult.outputContexts[0].parameters["name"];
-    //     var age = req.body.queryResult.outputContexts[0].parameters["age"];
-    //     var height = req.body.queryResult.outputContexts[0].parameters["unit-length.original"];
-    //     var weight = req.body.queryResult.outputContexts[0].parameters["unit-weight.original"];
-    //     var diet_plan = req.body.queryResult.outputContexts[0].parameters["Diet_plan"];
-    //     var food_allergies = req.body.queryResult.outputContexts[0].parameters["food_allergies"];
-    //     var health_condition = req.body.queryResult.outputContexts[0].parameters["health_condition"];
-
-    //     account.setAccountInfo(name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage).then((responseObj) => {
-    //         return res.json(responseObj);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     })
-    // }
+    else if (intent == "User Menu") {
+        menu.getMenuList(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     else if (intent == "Nutrition Information") {
         console.log("Here is the post request from DialogFlow");
