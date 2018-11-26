@@ -12,7 +12,7 @@ const {User} = require('./models/user');
 const welcome = require('./packages/welcome')
 const nutrition = require('./packages/nutrition')
 const account = require('./packages/account')
-const utils = requier('./packages/utils')
+const utils = require('./packages/utils')
 
 const port = process.env.PORT || 3000;
 
