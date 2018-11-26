@@ -166,6 +166,22 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
     }
+
+    else if (intent == "Food Fact") {
+        foodFact.getRandomFoodFact().then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    else if (intent == "Food Fact More") {
+        foodFact.getRandomFoodFact().then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 })
 
 app.listen(port, () => {
