@@ -75,8 +75,8 @@ app.post('/webhook', function (req, res) {
     else if (intent == "User Signup Health Condition") {
         var name = req.body.queryResult.outputContexts[0]["given-name"];
         var age = req.body.queryResult.outputContexts[0]["age"];
-        var height = `${req.body.queryResult.outputContexts[0]["unit-length"]["amount"]} ${req.body.queryResult.outputContexts[0]["unit-length"]["unit"]}`;
-        var weight = `${req.body.queryResult.outputContexts[0]["unit-weight"]["amount"]} ${req.body.queryResult.outputContexts[0]["unit-weight"]["unit"]}`;
+        var height = req.body.queryResult.outputContexts[0]["unit-length.original"];
+        var weight = req.body.queryResult.outputContexts[0]["unit-weight.original"];
         var diet_plan = req.body.queryResult.outputContexts[0]["Diet_plan"];
         var food_allergies = req.body.queryResult.outputContexts[0]["food_allergies"];
         var health_condition = req.body.queryResult.outputContexts[0]["health_condition"];
