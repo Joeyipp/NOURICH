@@ -70,16 +70,15 @@ var getAccountStatus = (name, defaultFulfillmentMessage) => {
     });
 }
 
-var setAccountInfo = (name, age, height, weight, bmi, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage) => {
+var setAccountInfo = (name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage) => {
     var userDetails = new User({
-        name,
-        age,
-        height,
-        weight,
-        bmi,
-        diet_plan,
-        food_allergies,
-        health_condition
+        "name": name,
+        "age": age,
+        "height": height,
+        "weight": weight,
+        "diet_plan": diet_plan,
+        "food_allergies": food_allergies,
+        "health_condition": health_condition
     })
 
     userDetails.save().then((doc) => {
