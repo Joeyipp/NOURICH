@@ -71,63 +71,65 @@ var getAccountStatus = (name, defaultFulfillmentMessage) => {
 }
 
 var setAccountInfo = (name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage) => {
-    var userDetails = new User({
-        "name": name,
-        "age": age,
-        "height": height,
-        "weight": weight,
-        "diet_plan": diet_plan,
-        "food_allergies": food_allergies,
-        "health_condition": health_condition
-    })
-
-    userDetails.save().then((doc) => {
-        console.log("User details saved!");
-    }, (e) => {
-        console.log(e);
-    });
-
-    resolve({
-        "payload": {
-            "google": {
-                "expectUserResponse": true,
-                "richResponse": {
-                    "items": [
-                    {
-                        "simpleResponse": {
-                            "textToSpeech": defaultFulfillmentMessage
+    return new Promise((resolve, reject) => {
+        var userDetails = new User({
+            "name": name,
+            "age": age,
+            "height": height,
+            "weight": weight,
+            "diet_plan": diet_plan,
+            "food_allergies": food_allergies,
+            "health_condition": health_condition
+        })
+    
+        userDetails.save().then((doc) => {
+            console.log("User details saved!");
+        }, (e) => {
+            console.log(e);
+        });
+    
+        resolve({
+            "payload": {
+                "google": {
+                    "expectUserResponse": true,
+                    "richResponse": {
+                        "items": [
+                        {
+                            "simpleResponse": {
+                                "textToSpeech": defaultFulfillmentMessage
+                            }
                         }
+                        ],
+                        "suggestions": [
+                            {
+                                "title": "Account Info"
+                            },
+                            {
+                                "title": "Suggest Me Food"
+                            },
+                            {
+                                "title": "Log My Food"
+                            },
+                            {
+                                "title": "My Food Diary"
+                            },
+                            {
+                                "title": "My Progression"
+                            },
+                            {
+                                "title": "Get Nutrition Info"
+                            },
+                            {
+                                "title": "Food Fact of the Day"
+                            },
+                            {
+                                "title": "Share My Progress"
+                            }
+                        ]
                     }
-                    ],
-                    "suggestions": [
-                        {
-                            "title": "Account Info"
-                        },
-                        {
-                            "title": "Suggest Me Food"
-                        },
-                        {
-                            "title": "Log My Food"
-                        },
-                        {
-                            "title": "My Food Diary"
-                        },
-                        {
-                            "title": "My Progression"
-                        },
-                        {
-                            "title": "Get Nutrition Info"
-                        },
-                        {
-                            "title": "Food Fact of the Day"
-                        },
-                        {
-                            "title": "Share My Progress"
-                        }
-                    ]
                 }
             }
-        }
+        });
     });
 }
 
