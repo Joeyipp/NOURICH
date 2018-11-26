@@ -126,6 +126,9 @@ app.post('/webhook', function (req, res) {
 
     else if (intent == "User Signup Health Condition") {
         userDetails.health_condition = req.body.queryResult.parameters["Health_Condition"]
+
+        console.log(userDetails);
+
         account.setAccountInfo(userDetails, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
