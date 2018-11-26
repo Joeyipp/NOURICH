@@ -73,7 +73,7 @@ app.post('/webhook', function (req, res) {
         })
     }
     else if (intent == "User Signup Health Condition") {
-        var name = req.body.queryResult.outputContexts[0].parameters["given-name"];
+        var name = req.body.queryResult.outputContexts[0].parameters["name"];
         var age = req.body.queryResult.outputContexts[0].parameters["age"];
         var height = req.body.queryResult.outputContexts[0].parameters["unit-length.original"];
         var weight = req.body.queryResult.outputContexts[0].parameters["unit-weight.original"];
