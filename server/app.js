@@ -73,13 +73,14 @@ app.post('/webhook', function (req, res) {
         })
     }
     else if (intent == "User Signup Health Condition") {
-        var name = req.body.queryResult.outputContexts[0][parameters]["given-name"];
-        var age = req.body.queryResult.outputContexts[0][parameters]["age"];
-        var height = req.body.queryResult.outputContexts[0][parameters]["unit-length.original"];
-        var weight = req.body.queryResult.outputContexts[0][parameters]["unit-weight.original"];
-        var diet_plan = req.body.queryResult.outputContexts[0][parameters]["Diet_plan"];
-        var food_allergies = req.body.queryResult.outputContexts[0][parameters]["food_allergies"];
-        var health_condition = req.body.queryResult.outputContexts[0][parameters]["health_condition"];
+        console.log(req.body.queryResult.outputContexts[0])
+        var name = req.body.queryResult.outputContexts[0].parameters["given-name"];
+        var age = req.body.queryResult.outputContexts[0].parameters["age"];
+        var height = req.body.queryResult.outputContexts[0].parameters["unit-length.original"];
+        var weight = req.body.queryResult.outputContexts[0].parameters["unit-weight.original"];
+        var diet_plan = req.body.queryResult.outputContexts[0].parameters["Diet_plan"];
+        var food_allergies = req.body.queryResult.outputContexts[0].parameters["food_allergies"];
+        var health_condition = req.body.queryResult.outputContexts[0].parameters["health_condition"];
 
         console.log(name, age, height, weight, diet_plan, food_allergies, health_condition);
 
