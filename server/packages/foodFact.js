@@ -77,9 +77,9 @@ var getRandomFoodFact = () => {
                             }
                         }
                         ],
-                        "suggestion":{
+                        "suggestions":[{
                                 "title": "More"
-                        }
+                        }]
                     }
                 }
             }
