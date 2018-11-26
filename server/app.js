@@ -140,12 +140,25 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Login") {
-        var name = req.body.queryResult.parameters["name"];
-        account.getAccountStatus(name, defaultFulfillmentMessage).then((responseObj) => {
+        userDetails.name = req.body.queryResult.parameters["name"];
+
+        account.getAccountStatus(userDetails.name, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
         })
+
+        // account.getAccountInfo(userDetails.name).then((doc) => {
+        //     userDetails.age = doc[0]
+        //     userDetails.height =
+        //     userDetails.weight = 
+        //     userDetails.diet_plan = 
+        //     userDetails.food_allergies = 
+        //     userDetails.health_condition =
+
+        // }).catch((err) => {
+        //     console.log(err);
+        // })
     }
 
     else if (intent == "User Menu") {

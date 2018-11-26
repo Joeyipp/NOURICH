@@ -125,4 +125,14 @@ var setAccountInfo = (userDetails, defaultFulfillmentMessage) => {
     });
 }
 
-module.exports = {getAccountStatus, setAccountInfo};
+var getAccountInfo = (name) => {
+    return new Promise((resolve, reject) => {
+        User.findOne({name}).then((doc) => {
+            resolve(doc);
+        }).catch((err) => {
+            console.log(err);
+        })
+    });
+}
+
+module.exports = {getAccountStatus, setAccountInfo, getAccountInfo};
