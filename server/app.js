@@ -65,7 +65,7 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Login") {
-        var name = req.body.queryResult.parameters["given-name"];
+        var name = req.body.queryResult.parameters["name"];
         account.getAccountStatus(name, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
