@@ -21,19 +21,11 @@ var User = mongoose.model('User', {
     type: String,
     default: null
   },
-  bmi: {
-    type: String,
-    default: null
-  },
   diet_plan: {
     type: String,
     default: null
   },
   food_allergies: {
-    type: String,
-    default: null
-  },
-  food_preference: {
     type: String,
     default: null
   },
