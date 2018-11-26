@@ -37,6 +37,17 @@ app.get('/', (req, res) => {
       });
 });
 
+// Initialize userDetails
+var userDetails = {
+    name: "",
+    age: "",
+    height: "",
+    weight: "",
+    diet_plan: "",
+    food_allergies: "",
+    health_condition: "" 
+}
+
 // Webhook
 app.post('/webhook', function (req, res) {
     if (!req.body) return res.sendStatus(400);
@@ -45,16 +56,6 @@ app.post('/webhook', function (req, res) {
     var intent = req.body.queryResult.intent.displayName;
     var userQuery = req.body.queryResult.queryText;
     var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text[0];
-
-    var userDetails = {
-        name: "",
-        age: "",
-        height: "",
-        weight: "",
-        diet_plan: "",
-        food_allergies: "",
-        health_condition: "" 
-    }
 
     if (intent == "Default Welcome Intent") {
         welcome.welcomePayload(defaultFulfillmentMessage).then((responseObj) => {
