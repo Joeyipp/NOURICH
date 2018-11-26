@@ -14,13 +14,13 @@ var welcomePayload = (defaultFulfillmentMessage) => {
                         ],
                         "suggestions": [
                             {
-                                "title": "Login"
+                                "title": "Login Existing Account"
                             },
                             {
-                                "title": "Signup"
+                                "title": "Create New Account"
                             },
                             {
-                                "title": "Continue as Guest"
+                                "title": "Continue As Guest"
                             }
                         ]
                     }
