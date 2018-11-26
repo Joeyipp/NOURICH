@@ -77,22 +77,11 @@ app.post('/webhook', function (req, res) {
         var age = req.body.queryResult.outputContexts[0]["age"];
         var height = `${req.body.queryResult.outputContexts[0]["unit-length"]["amount"]} ${req.body.queryResult.outputContexts[0]["unit-length"]["unit"]}`;
         var weight = `${req.body.queryResult.outputContexts[0]["unit-weight"]["amount"]} ${req.body.queryResult.outputContexts[0]["unit-weight"]["unit"]}`;
-
-        if (req.body.queryResult.outputContexts[0]["unit-length"]["unit"] == "ft") {
-            var bmi = (weight * 703) / (height * height)
-        }
-        else if (req.body.queryResult.outputContexts[0]["unit-length"]["unit"] == "cm") {
-            var bmi = weight / ((height/100) * (height/100))
-        }
-        else {
-            var bmi = weight / (height * height)
-        }
-
         var diet_plan = req.body.queryResult.outputContexts[0]["Diet_plan"];
         var food_allergies = req.body.queryResult.outputContexts[0]["food_allergies"];
         var health_condition = req.body.queryResult.outputContexts[0]["health_condition"];
 
-        account.setAccountInfo(name, age, height, weight, bmi, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage).then((responseObj) => {
+        account.setAccountInfo(name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
