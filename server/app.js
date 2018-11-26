@@ -81,6 +81,8 @@ app.post('/webhook', function (req, res) {
         var food_allergies = req.body.queryResult.outputContexts[0]["food_allergies"];
         var health_condition = req.body.queryResult.outputContexts[0]["health_condition"];
 
+        console.log(name, age, height, weight, diet_plan, food_allergies, health_condition);
+        
         account.setAccountInfo(name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
