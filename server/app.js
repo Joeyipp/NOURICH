@@ -12,6 +12,7 @@ const {User} = require('./models/user');
 const welcome = require('./packages/welcome')
 const nutrition = require('./packages/nutrition')
 const account = require('./packages/account')
+const utils = requier('./packages/utils')
 
 const port = process.env.PORT || 3000;
 
@@ -45,6 +46,16 @@ app.post('/webhook', function (req, res) {
     var userQuery = req.body.queryResult.queryText;
     var defaultFulfillmentMessage = req.body.queryResult.fulfillmentMessages[0].text.text[0];
 
+    var userDetails = {
+        name: "",
+        age: "",
+        height: "",
+        weight: "",
+        diet_plan: "",
+        food_allergies: "",
+        health_condition: "" 
+    }
+
     if (intent == "Default Welcome Intent") {
         welcome.welcomePayload(defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
@@ -53,11 +64,69 @@ app.post('/webhook', function (req, res) {
         })
     }
 
-    else if (intent == "Nutrition Information") {
-        console.log("Here is the post request from DialogFlow");
-        console.log(userQuery);
+    else if (intent == "User Signup Name") {
+        userDetails.name = utils.toTitle(req.body.queryResult.parameters.name)
 
-        nutrition.getNutritionPayload(userQuery, defaultFulfillmentMessage).then((responseObj) => {
+        welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    else if (intent == "User Signup Age") {
+        userDetails.age = req.body.queryResult.parameters.age.amount
+        
+        welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    else if (intent == "User Signup Height") {
+        userDetails.height = `${req.body.queryResult.parameters["unit-length"].amount} ${req.body.queryResult.parameters["unit-length"].unit}`; 
+        
+        welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    else if (intent == "User Signup Weight") {
+        userDetails.weight = `${req.body.queryResult.parameters["unit-weight"].amount} ${req.body.queryResult.parameters["unit-weight"].unit}`; 
+        
+        welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    else if (intent == "User Signup Diet Plan") {
+        userDetails.diet_plan = req.body.queryResult.parameters["Diet_plan"]
+        
+        welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    else if (intent == "User Signup Food Allergies") {
+        userDetails.food_allergies = req.body.queryResult.parameters["Food"]
+        
+        welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    else if (intent == "User Signup Health Condition") {
+        userDetails.health_condition = req.body.queryResult.parameters["Health_Condition"]
+        account.setAccountInfo(userDetails, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
@@ -72,16 +141,28 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
     }
-    else if (intent == "User Signup Health Condition") {
-        var name = req.body.queryResult.outputContexts[0].parameters["name"];
-        var age = req.body.queryResult.outputContexts[0].parameters["age"];
-        var height = req.body.queryResult.outputContexts[0].parameters["unit-length.original"];
-        var weight = req.body.queryResult.outputContexts[0].parameters["unit-weight.original"];
-        var diet_plan = req.body.queryResult.outputContexts[0].parameters["Diet_plan"];
-        var food_allergies = req.body.queryResult.outputContexts[0].parameters["food_allergies"];
-        var health_condition = req.body.queryResult.outputContexts[0].parameters["health_condition"];
 
-        account.setAccountInfo(name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage).then((responseObj) => {
+    // else if (intent == "User Signup Health Condition") {
+    //     var name = req.body.queryResult.outputContexts[0].parameters["name"];
+    //     var age = req.body.queryResult.outputContexts[0].parameters["age"];
+    //     var height = req.body.queryResult.outputContexts[0].parameters["unit-length.original"];
+    //     var weight = req.body.queryResult.outputContexts[0].parameters["unit-weight.original"];
+    //     var diet_plan = req.body.queryResult.outputContexts[0].parameters["Diet_plan"];
+    //     var food_allergies = req.body.queryResult.outputContexts[0].parameters["food_allergies"];
+    //     var health_condition = req.body.queryResult.outputContexts[0].parameters["health_condition"];
+
+    //     account.setAccountInfo(name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage).then((responseObj) => {
+    //         return res.json(responseObj);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     })
+    // }
+
+    else if (intent == "Nutrition Information") {
+        console.log("Here is the post request from DialogFlow");
+        console.log(userQuery);
+
+        nutrition.getNutritionPayload(userQuery, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);

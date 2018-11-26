@@ -30,4 +30,25 @@ var welcomePayload = (defaultFulfillmentMessage) => {
     });
 }
 
-module.exports.welcomePayload = welcomePayload;
+var nextPayload = (defaultFulfillmentMessage) => {
+    return new Promise((resolve, reject) => {
+        resolve({
+            "payload": {
+                "google": {
+                    "expectUserResponse": true,
+                    "richResponse": {
+                        "items": [
+                        {
+                            "simpleResponse": {
+                                "textToSpeech": defaultFulfillmentMessage
+                            }
+                        }
+                        ]
+                    }
+                }
+            }
+        })
+    });
+}
+
+module.exports = {welcomePayload, nextPayload};

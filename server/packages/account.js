@@ -70,19 +70,11 @@ var getAccountStatus = (name, defaultFulfillmentMessage) => {
     });
 }
 
-var setAccountInfo = (name, age, height, weight, diet_plan, food_allergies, health_condition, defaultFulfillmentMessage) => {
+var setAccountInfo = (userDetails, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {
-        var userDetails = new User({
-            "name": name,
-            "age": age,
-            "height": height,
-            "weight": weight,
-            "diet_plan": diet_plan,
-            "food_allergies": food_allergies,
-            "health_condition": health_condition
-        })
+        var user = new User(userDetails)
     
-        userDetails.save().then((doc) => {
+        user.save().then((doc) => {
             console.log("User details saved!");
         }, (e) => {
             console.log(e);
@@ -132,6 +124,5 @@ var setAccountInfo = (name, age, height, weight, diet_plan, food_allergies, heal
         });
     });
 }
-
 
 module.exports = {getAccountStatus, setAccountInfo};
