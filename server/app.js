@@ -146,6 +146,7 @@ app.post('/webhook', function (req, res) {
         account.getAccountStatus(userDetails.name, defaultFulfillmentMessage).then((responseObj) => {
             if (responseObj.payload.google.richResponse.suggestions) {
                 userExist = "True";
+                console.log(`getAccoutnStatus: ${userDetails}`)
             }
             return res.json(responseObj);
         }).catch((err) => {
