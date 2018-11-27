@@ -1,4 +1,4 @@
-var getProgressPayload = (link) => {
+var getProgressPayload = (text, link, defaultFulfillmentMessage) => {
     return {
         "payload": {
             "google": {
@@ -14,7 +14,7 @@ var getProgressPayload = (link) => {
                         "basicCard": {
                             "image": {
                                 "url": link,
-                                "accessibilityText": food_sum.sum_food_name
+                                "accessibilityText": link
                             }
                         }
                     }
@@ -34,10 +34,10 @@ var getProgress = (progression, progression1, defaultFulfillmentMessage) => {
         var calorie_link = "https://i.ibb.co/vd0V3j9/Calories.png";
 
         if (progression == "Weight" || progression1 == "Weight") {
-            resolve (getProgressPayload(weight_link));
+            resolve (getProgressPayload("Weight Progress", weight_link, defaultFulfillmentMessage));
         } 
         else if (progression == "Calories" || progression1 == "Calories") {
-            resolve (getProgressPayload(calorie_link));
+            resolve (getProgressPayload("Calories Progress", calorie_link, defaultFulfillmentMessage));
         }
         else {
             resolve({
