@@ -138,7 +138,7 @@ var getAccountInfo = (name) => {
 var displayAccountInfo = (userDetails, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {
 
-        var profile = `Age: ${userDetails.age}  \nHeight: ${userDetails.height}  \nWeight: ${userDetails.weight}  \nDiet Plan: ${userDetails.diet_plan}  \nFood Allergies: ${userDetails.food_allergies}  \nHealth Condtion: ${userDetails.health_condition}`
+        var profile = `Age: ${userDetails.age}  \nHeight: ${userDetails.height}  \nWeight: ${userDetails.weight}  \nDiet Plan: ${utils.toTitle(userDetails.diet_plan)}  \nFood Allergies: ${utils.toTitle(userDetails.food_allergies)}  \nHealth Condtion: ${utils.toTitle(userDetails.health_condition)}`
 
         resolve({
             "payload": {
@@ -153,8 +153,7 @@ var displayAccountInfo = (userDetails, defaultFulfillmentMessage) => {
                         },
                         {
                             "basicCard": {
-                                "title": "My Profile",
-                                "subtitle": userDetails.name,
+                                "title": userDetails.name,
                                 "formattedText": profile
                             }
                         }
