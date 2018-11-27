@@ -33,10 +33,10 @@ var getProgress = (progression, progression1, defaultFulfillmentMessage) => {
         var weight_link = "https://i.ibb.co/31xr5hY/Weight.png";
         var calorie_link = "https://i.ibb.co/vd0V3j9/Calories.png";
 
-        if (progression == "weight" || progression1 == "weight") {
+        if (progression == "Weight" || progression1 == "Weight") {
             resolve (getProgressPayload(weight_link));
         } 
-        else if (progression == "calories" || progression1 == "calories") {
+        else if (progression == "Calories" || progression1 == "Calories") {
             resolve (getProgressPayload(calorie_link));
         }
         else {
@@ -52,19 +52,30 @@ var getProgress = (progression, progression1, defaultFulfillmentMessage) => {
                                 }
                             },
                             {
-                                "basicCard": {
-                                    "image": {
-                                        "url": weight_link,
-                                        "accessibilityText": "Weight Progress"
-                                    }
-                                }
-                            },
-                            {
-                                "basicCard": {
-                                    "image": {
-                                        "url": calorie_link,
-                                        "accessibilityText": "Calorie Progress"
-                                    }
+                                "carouselBrowse": {
+                                    "items": [
+                                        {
+                                            "title": "Weight Progress",
+                                            "image": {
+                                                "url": weight_link,
+                                                "accessibilityText": "Weight Progress"
+                                            },
+                                            "openUrlAction": {
+                                                "url": weight_link
+                                            }
+                                        },
+                                        {
+                                            "title": "Calories Progress",
+                                            "image": {
+                                                "url": calorie_link,
+                                                "accessibilityText": "Calorie Progress"
+                                            },
+                                            "openUrlAction": {
+                                                "url": calorie_link
+                                            }
+                                        }
+                                    ]
+                                    
                                 }
                             }
                             ]
