@@ -14,8 +14,9 @@ const nutrition = require('./packages/nutrition');
 const account = require('./packages/account');
 const utils = require('./packages/utils');
 const foodFact = require('./packages/foodFact');
-const food = require('./packages/food')
-const menu = require('./packages/menu')
+const food = require('./packages/food');
+const menu = require('./packages/menu');
+const progress = require('./packages/progress');
 
 const port = process.env.PORT || 3000;
 
@@ -187,6 +188,17 @@ app.post('/webhook', function (req, res) {
 
     else if (intent == "Food Diary") {
         food.getFoodLog(userDetails.name, defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    else if (intent == "User Progression") {
+        var progression = req.body.queryResult.parameters["Progression"];
+        var progression1 = req.body.queryResult.parameters["Progression1"];
+        
+        progress.getProgress(progression, progression1, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
