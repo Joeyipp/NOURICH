@@ -148,17 +148,24 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
 
-        // account.getAccountInfo(userDetails.name).then((doc) => {
-        //     userDetails.age = doc[0]
-        //     userDetails.height =
-        //     userDetails.weight = 
-        //     userDetails.diet_plan = 
-        //     userDetails.food_allergies = 
-        //     userDetails.health_condition =
+        account.getAccountInfo(userDetails.name).then((doc) => {
+            userDetails.age = doc[0]["name"];
+            userDetails.height = doc[0]["height"];
+            userDetails.weight = doc[0]["weight"];
+            userDetails.diet_plan = doc[0]["diet_plan"];
+            userDetails.food_allergies = doc[0]["food_allergies"];
+            userDetails.health_condition = doc[0]["health_condition"];
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
-        // }).catch((err) => {
-        //     console.log(err);
-        // })
+    else if (intent == "Account Information") {
+        account.displayAccountInfo(userDetails).then((responseObj) => {
+            return res.json(responseObj)
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     else if (intent == "User Menu") {

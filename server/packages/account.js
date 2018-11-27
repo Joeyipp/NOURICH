@@ -135,4 +135,35 @@ var getAccountInfo = (name) => {
     });
 }
 
-module.exports = {getAccountStatus, setAccountInfo, getAccountInfo};
+var displayAccountInfo = (userDetails, defaultFulfillmentMessage) => {
+    return new Promise((resolve, reject) => {
+        
+        var profile = `Age: ${userDetails.name}  \nHeight: ${userDetails.height}  \nWeight: ${userDetails.weight}  \nDiet Plan: ${userDetails.diet_plan}  \nFood Allergies: ${userDetails.food_allergies}  \nHealth Condtion: ${userDetails.health_condition}`
+
+        resolve({
+            "payload": {
+                "google": {
+                    "expectUserResponse": true,
+                    "richResponse": {
+                        "items": [
+                        {
+                            "simpleResponse": {
+                                "textToSpeech": defaultFulfillmentMessage
+                            }
+                        },
+                        {
+                            "basicCard": {
+                                "title": "My Profile",
+                                "subtitle": userDetails.name.trim(),
+                                "formattedText": profile
+                            }
+                        }
+                        ]
+                    }
+                }
+            }
+        });
+    });
+}
+
+module.exports = {getAccountStatus, setAccountInfo, getAccountInfo, displayAccountInfo};
