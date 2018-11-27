@@ -155,13 +155,16 @@ app.post('/webhook', function (req, res) {
             userDetails.diet_plan = doc[0]["diet_plan"];
             userDetails.food_allergies = doc[0]["food_allergies"];
             userDetails.health_condition = doc[0]["health_condition"];
+
+            console.log(userDetails);
+
         }).catch((err) => {
             console.log(err);
         })
     }
 
     else if (intent == "Account Information") {
-        account.displayAccountInfo(userDetails).then((responseObj) => {
+        account.displayAccountInfo(userDetails, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj)
         }).catch((err) => {
             console.log(err);
