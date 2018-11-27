@@ -149,7 +149,7 @@ app.post('/webhook', function (req, res) {
         })
 
         account.getAccountInfo(userDetails.name).then((doc) => {
-            userDetails.age = doc[0]["name"];
+            userDetails.age = doc[0]["age"];
             userDetails.height = doc[0]["height"];
             userDetails.weight = doc[0]["weight"];
             userDetails.diet_plan = doc[0]["diet_plan"];
