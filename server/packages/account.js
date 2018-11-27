@@ -128,7 +128,6 @@ var setAccountInfo = (userDetails, defaultFulfillmentMessage) => {
 var getAccountInfo = (name) => {
     return new Promise((resolve, reject) => {
         User.findOne({name}).then((doc) => {
-            console.log(doc);
             resolve(doc);
         }).catch((err) => {
             console.log(err);

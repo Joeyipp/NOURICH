@@ -149,12 +149,12 @@ app.post('/webhook', function (req, res) {
         })
 
         account.getAccountInfo(userDetails.name).then((doc) => {
-            userDetails.age = doc[0]["age"];
-            userDetails.height = doc[0]["height"];
-            userDetails.weight = doc[0]["weight"];
-            userDetails.diet_plan = doc[0]["diet_plan"];
-            userDetails.food_allergies = doc[0]["food_allergies"];
-            userDetails.health_condition = doc[0]["health_condition"];
+            userDetails.age = doc["age"];
+            userDetails.height = doc["height"];
+            userDetails.weight = doc["weight"];
+            userDetails.diet_plan = doc["diet_plan"];
+            userDetails.food_allergies = doc["food_allergies"];
+            userDetails.health_condition = doc["health_condition"];
 
             console.log(userDetails);
 
