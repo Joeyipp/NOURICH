@@ -140,39 +140,28 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Login") {
-        var userExist = "False";
         userDetails.name = req.body.queryResult.parameters["name"];
 
         account.getAccountStatus(userDetails.name, defaultFulfillmentMessage).then((responseObj) => {
-            if (responseObj.payload.google.richResponse.suggestions) {
-                userExist = "True";
-            }
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
         })
-
-        console.log(`Hii! ${userExist}`);
-        
-        if (userExist == "True") {
-            account.getAccountInfo(userDetails.name).then((doc) => {
-                userDetails.age = doc["age"];
-                userDetails.height = doc["height"];
-                userDetails.weight = doc["weight"];
-                userDetails.diet_plan = doc["diet_plan"];
-                userDetails.food_allergies = doc["food_allergies"];
-                userDetails.health_condition = doc["health_condition"];
-    
-                console.log(userDetails);
-    
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
     }
 
     else if (intent == "Account Information") {
-        account.displayAccountInfo(userDetails, defaultFulfillmentMessage).then((responseObj) => {
+
+        account.getAccountInfo(userDetails.name).then((doc) => {
+            userDetails.age = doc["age"];
+            userDetails.height = doc["height"];
+            userDetails.weight = doc["weight"];
+            userDetails.diet_plan = doc["diet_plan"];
+            userDetails.food_allergies = doc["food_allergies"];
+            userDetails.health_condition = doc["health_condition"];
+
+            return account.displayAccountInfo(userDetails, defaultFulfillmentMessage)
+            
+        }).then((responseObj) => {
             return res.json(responseObj)
         }).catch((err) => {
             console.log(err);
