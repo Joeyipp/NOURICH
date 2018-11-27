@@ -11,9 +11,11 @@ var getProgressPayload = (link) => {
                         }
                     },
                     {
-                        "image": {
-                            "url": link,
-                            "accessibilityText": "Weight Progress"
+                        "basicCard": {
+                            "image": {
+                                "url": link,
+                                "accessibilityText": food_sum.sum_food_name
+                            }
                         }
                     }
                     ]
@@ -50,15 +52,19 @@ var getProgress = (progression, progression1, defaultFulfillmentMessage) => {
                                 }
                             },
                             {
-                                "image": {
-                                    "url": weight_link,
-                                    "accessibilityText": "Weight Progress"
+                                "basicCard": {
+                                    "image": {
+                                        "url": weight_link,
+                                        "accessibilityText": "Weight Progress"
+                                    }
                                 }
                             },
                             {
-                                "image": {
-                                    "url": calorie_link,
-                                    "accessibilityText": "Calorie Progress"
+                                "basicCard": {
+                                    "image": {
+                                        "url": calorie_link,
+                                        "accessibilityText": "Calorie Progress"
+                                    }
                                 }
                             }
                             ]
