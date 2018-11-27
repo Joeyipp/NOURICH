@@ -185,6 +185,14 @@ app.post('/webhook', function (req, res) {
         })
     }
 
+    else if (intent == "Food Diary") {
+        food.getFoodLog(userDetails.name, defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     else if (intent == "Nutrition Information") {
         console.log("Here is the post request from DialogFlow");
         console.log(userQuery);

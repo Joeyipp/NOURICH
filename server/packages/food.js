@@ -81,4 +81,67 @@ var logFood = async (username, userQuery, defaultFulfillmentMessage) => {
     });
 }
 
-module.exports.logFood = logFood;
+var getFoodLog = (name, defaultFulfillmentMessage) => {
+    return new Promise((resolve, reject) => {
+        var default_daily_calories = 2000;
+
+        User.findOne({name}).then((doc) => {
+            var food_log = doc.food_log;
+            var food_sum = {
+                sum_food_name: "",
+                sum_calories: 0,
+                sum_total_fat: 0,
+                sum_cholesterol: 0,
+                sum_sodium: 0,
+                sum_potassium: 0,
+                sum_total_carbohydrates: 0,
+                sum_fibre: 0,
+                sum_sugar: 0,
+                sum_protein: 0,
+            }
+
+            for (i = 0; i < food_log.food_name.length; i++) {
+                food_sum.sum_food_name += `${food_log.food_name[i]}\n`
+                food_sum.sum_calories += food_log.calories[i],
+                food_sum.sum_total_fat += food_log.total_fat[i],
+                food_sum.sum_cholesterol += food_log.cholesterol[i], 
+                food_sum.sum_sodium += food_log.sodium[i], 
+                food_sum.sum_potassium += food_log.potassium[i], 
+                food_sum.sum_total_carbohydrates += food_log.total_carbohydrates[i], 
+                food_sum.sum_fibre += food_log.fibre[i], 
+                food_sum.sum_sugar += food_log.sugar[i], 
+                food_sum.sum_protein += food_log.protein[i]
+            }
+
+            var nutrition_description = `Calories: ${food_sum.sum_calories.toFixed()}  \nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g  \nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg  \nSodium: ${food_sum.sum_sodium.toFixed()}mg  \nPotassium: ${food_sum.sum_potassium.toFixed()}mg  \nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g  \nDietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g  \nSugars: ${food_sum.sum_sugar.toFixed(1)}g  \nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
+
+            resolve({
+                "payload": {
+                    "google": {
+                        "expectUserResponse": true,
+                        "richResponse": {
+                            "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": defaultFulfillmentMessage
+                                }
+                            },
+                            {
+                                "basicCard": {
+                                    "title": "Daily Food Summary",
+                                    "subtitle": food_sum.sum_food_name.trim(),
+                                    "formattedText": nutrition_description,
+                                }
+                            }
+                            ]
+                        }
+                    }
+                }
+            });
+        }).catch((err) => {
+            console.log(err);
+        })
+    });
+}
+
+module.exports = {logFood, getFoodLog};
