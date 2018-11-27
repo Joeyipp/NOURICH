@@ -14,6 +14,7 @@ const nutrition = require('./packages/nutrition');
 const account = require('./packages/account');
 const utils = require('./packages/utils');
 const foodFact = require('./packages/foodFact');
+const food = require('./packages/food')
 const menu = require('./packages/menu')
 
 const port = process.env.PORT || 3000;
@@ -160,7 +161,7 @@ app.post('/webhook', function (req, res) {
             userDetails.health_condition = doc["health_condition"];
 
             return account.displayAccountInfo(userDetails, defaultFulfillmentMessage)
-            
+
         }).then((responseObj) => {
             return res.json(responseObj)
         }).catch((err) => {
@@ -170,6 +171,14 @@ app.post('/webhook', function (req, res) {
 
     else if (intent == "User Menu") {
         menu.getMenuList(defaultFulfillmentMessage).then((responseObj) => {
+            return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    else if (intent == "Log My Food Followup") {
+        food.logFood(userDetails.name, userQuery, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
