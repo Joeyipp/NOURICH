@@ -25,8 +25,11 @@ var getProgressPayload = (link) => {
 
 var getProgress = (progression, progression1, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {
-        var weight_link = "https://drive.google.com/file/d/1SmulVMzZpZOJiUo72YPo2w80eQwN5Kz0/view";
-        var calorie_link = "https://drive.google.com/file/d/1-CGj3zrJFt05gRmZhy6_vqe7nLcxpZWW/view";
+        // weight: https://ibb.co/rkB7Kyf
+        // calorie: https://ibb.co/NNct9yR
+    
+        var weight_link = "https://i.ibb.co/31xr5hY/Weight.png";
+        var calorie_link = "https://i.ibb.co/vd0V3j9/Calories.png";
 
         if (progression == "weight" || progression1 == "weight") {
             resolve (getProgressPayload(weight_link));
