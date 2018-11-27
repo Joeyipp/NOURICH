@@ -115,6 +115,6 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
     }          
 }
 
-module.exports.getNutritionPayload = getNutritionPayload;
+module.exports = {getNutrition, getNutritionPayload};
 
 // getNutrition("1 slice of bread").then((res) => {console.log(res)})
