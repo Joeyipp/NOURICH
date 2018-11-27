@@ -2,6 +2,7 @@ const {mongoose} = require('./../db/mongoose');
 const {User} = require('./../models/user');
 const nutrition = require('./nutrition');
 const account = require('./account');
+const moment = require('moment')
 
 var logFood = async (username, userQuery, defaultFulfillmentMessage) => {
     var doc = await account.getAccountInfo(username);
@@ -101,19 +102,29 @@ var getFoodLog = (name, defaultFulfillmentMessage) => {
             }
 
             for (i = 0; i < food_log.food_name.length; i++) {
-                food_sum.sum_food_name += `${food_log.food_name[i]}\n`
-                food_sum.sum_calories += food_log.calories[i],
-                food_sum.sum_total_fat += food_log.total_fat[i],
-                food_sum.sum_cholesterol += food_log.cholesterol[i], 
-                food_sum.sum_sodium += food_log.sodium[i], 
-                food_sum.sum_potassium += food_log.potassium[i], 
-                food_sum.sum_total_carbohydrates += food_log.total_carbohydrates[i], 
-                food_sum.sum_fibre += food_log.fibre[i], 
-                food_sum.sum_sugar += food_log.sugar[i], 
-                food_sum.sum_protein += food_log.protein[i]
+                if (moment(food_log.consumed_at[i]).format('MM-DD-YYYY') == moment().format('MM-DD-YYYY')) {
+                    food_sum.sum_food_name += `${food_log.food_name[i]}\n`
+                    food_sum.sum_calories += food_log.calories[i],
+                    food_sum.sum_total_fat += food_log.total_fat[i],
+                    food_sum.sum_cholesterol += food_log.cholesterol[i], 
+                    food_sum.sum_sodium += food_log.sodium[i], 
+                    food_sum.sum_potassium += food_log.potassium[i], 
+                    food_sum.sum_total_carbohydrates += food_log.total_carbohydrates[i], 
+                    food_sum.sum_fibre += food_log.fibre[i], 
+                    food_sum.sum_sugar += food_log.sugar[i], 
+                    food_sum.sum_protein += food_log.protein[i]
+                }
             }
 
             var nutrition_description = `Calories: ${food_sum.sum_calories.toFixed()}  \nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g  \nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg  \nSodium: ${food_sum.sum_sodium.toFixed()}mg  \nPotassium: ${food_sum.sum_potassium.toFixed()}mg  \nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g  \nDietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g  \nSugars: ${food_sum.sum_sugar.toFixed(1)}g  \nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
+            var calories_advices = [`Based on FDA recommended 2000 calories per day, you have ${default_daily_calories - food_sum.sum_calories} calories remaining.`, `It looks like you've exceeded the FDA recommended 2000 calories per day limit. Do control your calories intake for the day.`];
+            var calories_advice;
+
+            if (food_sum.sum_calories <= default_daily_calories) {
+                calories_advice = calories_advices[0]
+            } else {
+                calories_advice = calories_advices[1]
+            }
 
             resolve({
                 "payload": {
@@ -131,6 +142,15 @@ var getFoodLog = (name, defaultFulfillmentMessage) => {
                                     "title": "Daily Food Summary",
                                     "subtitle": food_sum.sum_food_name.trim(),
                                     "formattedText": nutrition_description,
+                                    "image": {
+                                        "url": food_log.photo[0],
+                                        "accessibilityText": food_sum.sum_food_name
+                                    }
+                                }
+                            },
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": calories_advice
                                 }
                             }
                             ]
