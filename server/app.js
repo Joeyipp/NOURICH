@@ -108,7 +108,7 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Signup Diet Plan") {
-        userDetails.diet_plan = req.body.queryResult.parameters["Diet_plan"]
+        userDetails.diet_plan = utils.toTitle(req.body.queryResult.parameters["Diet_plan"])
         
         welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
@@ -118,7 +118,7 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Signup Food Allergies") {
-        userDetails.food_allergies = req.body.queryResult.parameters["Food"]
+        userDetails.food_allergies = utils.toTitle(req.body.queryResult.parameters["Food"])
         
         welcome.nextPayload(defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
@@ -128,7 +128,7 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Signup Health Condition") {
-        userDetails.health_condition = req.body.queryResult.parameters["Health_Condition"]
+        userDetails.health_condition = utils.toTitle(req.body.queryResult.parameters["Health_Condition"])
 
         console.log(userDetails);
 
