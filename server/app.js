@@ -140,19 +140,19 @@ app.post('/webhook', function (req, res) {
     }
 
     else if (intent == "User Login") {
-        var userExist = False;
+        var userExist = "False";
         userDetails.name = req.body.queryResult.parameters["name"];
 
         account.getAccountStatus(userDetails.name, defaultFulfillmentMessage).then((responseObj) => {
             if (responseObj.payload.google.richResponse.suggestions) {
-                userExist = True;
+                userExist = "True";
             }
             return res.json(responseObj);
         }).catch((err) => {
             console.log(err);
         })
 
-        if (userExist) {
+        if (userExist == "True") {
             account.getAccountInfo(userDetails.name).then((doc) => {
                 userDetails.age = doc["age"];
                 userDetails.height = doc["height"];
