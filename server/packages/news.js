@@ -23,75 +23,19 @@ var getArticles = (userQuery, defaultFulfillmentMessage) => {
                                 }
                             },
                             {
-                                "carouselBrowse": {
-                                    "items": [
-                                        {
-                                            "title": res.articles[0].title,
-                                            "description": res.articles[0].description,
-                                            "footer": `Source from ${res.articles[0].source.name}`,
-                                            "image": {
-                                                "url": res.articles[0].urlToImage,
-                                                "accessibilityText": res.articles[0].title
-                                            },
-                                            "openUrlAction": {
-                                                "url": res.articles[0].url
-                                            }
-                                        },
-                                        {
-                                            "title": res.articles[1].title,
-                                            "description": res.articles[1].description,
-                                            "footer": `Source from ${res.articles[1].source.name}`,
-                                            "image": {
-                                                "url": res.articles[1].urlToImage,
-                                                "accessibilityText": res.articles[1].title
-                                            },
-                                            "openUrlAction": {
-                                                "url": res.articles[1].url
-                                            }
-                                        },
-                                        {
-                                            "title": res.articles[2].title,
-                                            "description": res.articles[2].description,
-                                            "footer": `Source from ${res.articles[2].source.name}`,
-                                            "image": {
-                                                "url": res.articles[2].urlToImage,
-                                                "accessibilityText": res.articles[2].title
-                                            },
-                                            "openUrlAction": {
-                                                "url": res.articles[2].url
-                                            }
-                                        },
-                                        {
-                                            "title": res.articles[3].title,
-                                            "description": res.articles[3].description,
-                                            "footer": `Source from ${res.articles[3].source.name}`,
-                                            "image": {
-                                                "url": res.articles[3].urlToImage,
-                                                "accessibilityText": res.articles[3].title
-                                            },
-                                            "openUrlAction": {
-                                                "url": res.articles[3].url
-                                            }
-                                        },
-                                        {
-                                            "title": res.articles[4].title,
-                                            "description": res.articles[4].description,
-                                            "footer": `Source from ${res.articles[4].source.name}`,
-                                            "image": {
-                                                "url": res.articles[4].urlToImage,
-                                                "accessibilityText": res.articles[4].title
-                                            },
-                                            "openUrlAction": {
-                                                "url": res.articles[4].url
-                                            }
-                                        }
-                                    ]
-                                    
+                                "basicCard": {
+                                    "title": res.articles[0].title,
+                                    "subtitle": `Source from ${res.articles[4].source.name}`,
+                                    "formattedText": res.articles[0].description,
+                                    "image": {
+                                        "url": res.articles[0].urlToImage,
+                                        "accessibilityText": res.articles[0].title
+                                    }
                                 }
                             },
                             {
                                 "simpleResponse": {
-                                    "textToSpeech": `The first one reads ${res.articles[0].description}`
+                                    "textToSpeech": `It reads ${res.articles[0].description}`
                                 }
                             }
                             ]
