@@ -142,12 +142,14 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
 
-        setTimeout(cayley.writeUserInfo(userDetails.name).then((doc) => {
-            console.log(doc);
-            console.log("User details saved to Cayley Graph")
-        }).catch((err) => {
-            console.log(err)
-        }), 10000)
+        setTimeout(() => {
+            cayley.writeUserInfo(userDetails.name).then((doc) => {
+                console.log(doc);
+                console.log("User details saved to Cayley Graph")
+            }).catch((err) => {
+                console.log(err)
+            })
+        }, 10000)
     }
 
     else if (intent == "User Login") {
