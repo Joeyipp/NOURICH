@@ -1,7 +1,9 @@
 const account = require('./../packages/account');
+
 const client = require('node-cayley')('116.203.24.85:64210', {
     promisify: true
 });
+
 const g = graph = client.g; // Or: const g = graph = client.graph;
 
 var getUserInfo = (name) => {
@@ -61,7 +63,7 @@ var writeUserInfo = (name) => {
             delete user.food_log.protein;
             delete user.food_log.photo;
             
-            resolve(user);
+            // resolve(user);
 
             return client.write([
                 // primaryKey: user.primaryKey,
@@ -70,7 +72,7 @@ var writeUserInfo = (name) => {
                 user
             ])
         }).then((res) => {
-            console.log(res);
+            resolve(res);
         }).catch((err) => {
             reject(err);
         })

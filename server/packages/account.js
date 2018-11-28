@@ -1,7 +1,6 @@
 const {mongoose} = require('./../db/mongoose');
 const {User} = require('./../models/user');
 const utils = require('./utils');
-const cayley = require('./../db/cayley')
 
 var getAccountStatus = (name, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {

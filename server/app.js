@@ -149,7 +149,7 @@ app.post('/webhook', function (req, res) {
             }).catch((err) => {
                 console.log(err)
             })
-        }, 10000)
+        }, 2000)
     }
 
     else if (intent == "User Login") {
@@ -195,6 +195,15 @@ app.post('/webhook', function (req, res) {
         }).catch((err) => {
             console.log(err);
         })
+
+        setTimeout(() => {
+            cayley.writeUserInfo(userDetails.name).then((doc) => {
+                console.log(doc);
+                console.log("User foodlog saved to Cayley Graph")
+            }).catch((err) => {
+                console.log(err)
+            })
+        }, 2000)
     }
 
     else if (intent == "Food Diary") {
