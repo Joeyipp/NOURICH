@@ -153,7 +153,8 @@ app.post('/webhook', function (req, res) {
         })
 
         cayley.writeUserInfo(userDetails.name).then((doc) => {
-            console.log(doc)
+            console.log(doc);
+            console.log("User details saved to Cayley Graph")
         }).catch((err) => {
             console.log(err)
         })
