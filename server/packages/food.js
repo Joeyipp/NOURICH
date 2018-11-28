@@ -63,7 +63,7 @@ var logFood = async (username, userQuery, defaultFulfillmentMessage) => {
         }).catch((err) => {
             console.log(err);
         })
-        
+
     }).catch((err) => {
         console.log(err);
     })
@@ -147,7 +147,7 @@ var getFoodLog = (name, defaultFulfillmentMessage) => {
                                     "formattedText": nutrition_description,
                                     "image": {
                                         "url": food_log.photo[0],
-                                        "accessibilityText": food_sum.sum_food_name
+                                        "accessibilityText": "Food"
                                     }
                                 }
                             },
