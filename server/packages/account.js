@@ -1,6 +1,7 @@
 const {mongoose} = require('./../db/mongoose');
 const {User} = require('./../models/user');
 const utils = require('./utils');
+const cayley = require('./../db/cayley')
 
 var getAccountStatus = (name, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {
@@ -77,6 +78,13 @@ var setAccountInfo = (userDetails, defaultFulfillmentMessage) => {
     
         user.save().then((doc) => {
             console.log("User details saved!");
+
+            cayley.writeUserInfo(doc.name).then((doc) => {
+                console.log(doc)
+            }).catch((err) => {
+                console.log(err)
+            })
+
         }, (e) => {
             console.log(e);
         });

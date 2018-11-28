@@ -58,6 +58,13 @@ var logFood = async (username, userQuery, defaultFulfillmentMessage) => {
             }
         }).then((doc) => {
                 console.log("Food pushed!");
+
+                cayley.writeUserInfo(doc.name).then((doc) => {
+                    console.log(doc)
+                }).catch((err) => {
+                    console.log(err)
+                })
+
         }).catch((err) => {
             console.log(err);
         })

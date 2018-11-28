@@ -17,7 +17,8 @@ const foodFact = require('./packages/foodFact');
 const food = require('./packages/food');
 const menu = require('./packages/menu');
 const progress = require('./packages/progress');
-const news = require('./packages/news')
+const news = require('./packages/news');
+const cayley = require('./db/cayley');
 
 const port = process.env.PORT || 3000;
 

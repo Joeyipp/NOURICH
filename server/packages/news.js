@@ -107,3 +107,13 @@ var getArticles = (userQuery, defaultFulfillmentMessage) => {
 
 module.exports.getArticles = getArticles;
 
+// newsapi.v2.everything({
+//     q: "Indian curry",
+//     from: '2018-10-28',
+//     to: '2018-11-25',
+//     language: 'en'
+//   }).then((res) => {
+//       for (var i = 0; i < 5; i++) {
+//           console.log(res.articles[i].title)
+//       }
+// })
