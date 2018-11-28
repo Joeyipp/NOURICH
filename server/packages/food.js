@@ -63,11 +63,7 @@ var logFood = async (username, userQuery, defaultFulfillmentMessage) => {
         }).catch((err) => {
             console.log(err);
         })
-
-        return cayley.writeUserInfo(username)
-
-    }).then((res) => {
-        console.log(res);
+        
     }).catch((err) => {
         console.log(err);
     })

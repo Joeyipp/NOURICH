@@ -77,14 +77,6 @@ var setAccountInfo = (userDetails, defaultFulfillmentMessage) => {
     
         user.save().then((doc) => {
             console.log("User details saved!");
-
-            cayley.writeUserInfo(userDetails.name).then((doc) => {
-                console.log(doc);
-                console.log("User details saved to Cayley Graph")
-            }).catch((err) => {
-                console.log(err)
-            })
-            
         }, (e) => {
             console.log(e);
         });

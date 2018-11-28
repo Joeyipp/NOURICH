@@ -142,14 +142,12 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
 
-        // setTimeout(() => {
-        //     cayley.writeUserInfo(userDetails.name).then((doc) => {
-        //         console.log(doc);
-        //         console.log("User details saved to Cayley Graph")
-        //     }).catch((err) => {
-        //         console.log(err)
-        //     })
-        // }, 2000)
+        cayley.writeUserInfo(userDetails.name).then((doc) => {
+            console.log(doc);
+            console.log("User details saved to Cayley Graph")
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     else if (intent == "User Login") {
@@ -196,14 +194,12 @@ app.post('/webhook', function (req, res) {
             console.log(err);
         })
 
-        // setTimeout(() => {
-        //     cayley.writeUserInfo(userDetails.name).then((doc) => {
-        //         console.log(doc);
-        //         console.log("User foodlog saved to Cayley Graph")
-        //     }).catch((err) => {
-        //         console.log(err)
-        //     })
-        // }, 2000)
+        cayley.writeUserInfo(userDetails.name).then((doc) => {
+            console.log(doc);
+            console.log("User foodlog saved to Cayley Graph")
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     else if (intent == "Food Diary") {
