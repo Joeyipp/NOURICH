@@ -3,7 +3,7 @@ const newsapi = new NewsAPI('a92cb68334974232b4f987644734a5a2');
 // To query /v2/top-headlines
 // All options passed to topHeadlines are optional, but you need to include at least one of them
 
-var getArticles = (userQuery) => {
+var getArticles = (userQuery, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {
         newsapi.v2.everything({
             q: userQuery,
