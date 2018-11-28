@@ -17,6 +17,7 @@ const foodFact = require('./packages/foodFact');
 const food = require('./packages/food');
 const menu = require('./packages/menu');
 const progress = require('./packages/progress');
+const news = require('./packages/news')
 
 const port = process.env.PORT || 3000;
 
@@ -197,9 +198,20 @@ app.post('/webhook', function (req, res) {
     else if (intent == "User Progression") {
         var progression = req.body.queryResult.parameters["Progression"];
         var progression1 = req.body.queryResult.parameters["Progression1"];
-        
+
         progress.getProgress(progression, progression1, defaultFulfillmentMessage).then((responseObj) => {
             return res.json(responseObj);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    else if (intent == "User Suggestion") {
+        account.getAccountInfo(userDetails.name).then((doc) => {
+            userDetails.diet_plan = doc["diet_plan"];
+            return news.getArticles(userDetails.diet_plan, defaultFulfillmentMessage);
+        }).then((responseObj) => {
+            return res.json(responseObj)
         }).catch((err) => {
             console.log(err);
         })

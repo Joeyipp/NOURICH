@@ -27,8 +27,9 @@
   "dependencies": {
     "express": "^4.16.4",
     "hbs": "^4.0.1",
-    "request": "^2.88.0",
+    "moment": "2.22.2",
     "mongoose": "5.3.13",
-    "moment": "2.22.2"
+    "newsapi": "^2.4.0",
+    "request": "^2.88.0"
   }
 }

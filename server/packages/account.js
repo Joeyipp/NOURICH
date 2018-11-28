@@ -41,7 +41,7 @@ var getAccountStatus = (name, defaultFulfillmentMessage) => {
                                         "title": "Account Info"
                                     },
                                     {
-                                        "title": "Suggest Me Food"
+                                        "title": "Suggest Me"
                                     },
                                     {
                                         "title": "Log My Food"
@@ -98,7 +98,7 @@ var setAccountInfo = (userDetails, defaultFulfillmentMessage) => {
                                 "title": "Account Info"
                             },
                             {
-                                "title": "Suggest Me Food"
+                                "title": "Suggest Me"
                             },
                             {
                                 "title": "Log My Food"
