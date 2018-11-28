@@ -2,7 +2,8 @@ const {mongoose} = require('./../db/mongoose');
 const {User} = require('./../models/user');
 const nutrition = require('./nutrition');
 const account = require('./account');
-const moment = require('moment')
+const moment = require('moment');
+const cayley = require('./../db/cayley');
 
 var logFood = async (username, userQuery, defaultFulfillmentMessage) => {
     var doc = await account.getAccountInfo(username);
