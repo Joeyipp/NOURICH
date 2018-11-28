@@ -120,7 +120,7 @@ var getFoodLog = (name, defaultFulfillmentMessage) => {
             }
 
             var nutrition_description = `Calories: ${food_sum.sum_calories.toFixed()}  \nTotal Fat: ${food_sum.sum_total_fat.toFixed(1)}g  \nCholesterol: ${food_sum.sum_cholesterol.toFixed(1)}mg  \nSodium: ${food_sum.sum_sodium.toFixed()}mg  \nPotassium: ${food_sum.sum_potassium.toFixed()}mg  \nTotal Carbohydrates: ${food_sum.sum_total_carbohydrates.toFixed()}g  \nDietary Fiber: ${food_sum.sum_fibre.toFixed(1)}g  \nSugars: ${food_sum.sum_sugar.toFixed(1)}g  \nProtein: ${food_sum.sum_protein.toFixed(1)}g`;
-            var calories_advices = [`Based on FDA recommended 2000 calories per day, you have ${default_daily_calories - food_sum.sum_calories} calories remaining.`, `It looks like you've exceeded the FDA recommended 2000 calories per day limit. Do control your calories intake for the day.`];
+            var calories_advices = [`Based on FDA recommended 2000 calories per day, you have ${default_daily_calories.toFixed(2) - food_sum.sum_calories.toFixed(2)} calories remaining.`, `It looks like you've exceeded the FDA recommended 2000 calories per day limit. Do control your calories intake for the day.`];
             var calories_advice;
 
             if (food_sum.sum_calories <= default_daily_calories) {
