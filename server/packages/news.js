@@ -91,7 +91,7 @@ var getArticles = (userQuery, defaultFulfillmentMessage) => {
                             },
                             {
                                 "simpleResponse": {
-                                    "textToSpeech": ` The first one reads ${res.articles[0].description}`
+                                    "textToSpeech": `The first one reads ${res.articles[0].description}`
                                 }
                             }
                             ]
