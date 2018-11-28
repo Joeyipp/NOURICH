@@ -151,6 +151,12 @@ app.post('/webhook', function (req, res) {
         }).catch((err) => {
             console.log(err);
         })
+
+        cayley.writeUserInfo(userDetails.name).then((doc) => {
+            console.log(doc)
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     else if (intent == "Account Information") {
