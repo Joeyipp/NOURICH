@@ -92,11 +92,11 @@ var deleteUserInfo = (userObj) => {
 }
 
 ////////////////// EXAMPLE WRITE TRIPLES ////////////////////
-writeUserInfo("John").then((doc) => {
-    console.log(doc)
-}).catch((err) => {
-    console.log(err)
-})
+// writeUserInfo("John").then((doc) => {
+//     console.log(doc)
+// }).catch((err) => {
+//     console.log(err)
+// })
 
 //////////////////// EXAMPLE DELETE TRIPLES ////////////////////
 // getUserInfo("John").then((doc) => {
