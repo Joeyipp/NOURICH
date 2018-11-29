@@ -117,4 +117,4 @@ var getNutritionPayload = async (userQuery, defaultFulfillmentMessage) => {
 
 module.exports = {getNutrition, getNutritionPayload};
 
-// getNutrition("1 slice of bread").then((res) => {console.log(res)})
+// getNutrition("1 burrito").then((res) => {console.log(res.food)})
