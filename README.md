@@ -1,4 +1,5 @@
-## NOURICH
+## NOURICH.ME
+### Description
 A **Google Assistant** Food & Nutritional **Chatbot** (Advanced Semantic Web Fall 2018)
 
 ![Sample](https://github.com/Joeyipp/NOURICH/blob/master/images/NOURISH.png)
