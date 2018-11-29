@@ -1,6 +1,6 @@
 const account = require('./../packages/account');
 
-const client = require('node-cayley')('116.203.24.85:64210', {
+const client = require('node-cayley')('IPADDRESS:64210', {
     promisify: true
 });
 
