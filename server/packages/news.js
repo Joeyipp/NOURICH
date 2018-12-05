@@ -7,7 +7,7 @@ var getArticles = (userQuery, defaultFulfillmentMessage) => {
     return new Promise((resolve, reject) => {
         newsapi.v2.everything({
             q: userQuery,
-            from: '2018-11-01',
+            from: '2018-11-20',
             to: '2018-11-25',
             language: 'en'
           }).then((res) => {
